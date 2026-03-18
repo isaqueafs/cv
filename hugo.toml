@@ -123,7 +123,7 @@ title = "dev Isaque Santos"
 contentDir = "content/br"
 
 [languages.br.params]
-subtitle = "Um tema simples e retrô para Hugo"
+subtitle = "CV do dev Isaque Santos"
 owner = ""
 keywords = ""
 copyright = "Isaque Santos :: Feito em <a href='https://gohugo.io' target='_blank'>Hugo</a> :: Tema por <a target='_blank' href='https://github.com/panr'>Panr</a>"
