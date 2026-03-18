@@ -103,15 +103,18 @@ logoHomeLink = "/cv/en/"
 [[languages.en.menu.main]]
 identifier = "about"
 name = "About"
-url = "/cv/en/about"
+url = "/en/about"
+weight = 1
 [[languages.en.menu.main]]
 identifier = "showcase"
 name = "Showcase"
-url = "/cv/en/showcase"
+url = "/en/showcase"
+weight = 2
 [[languages.en.menu.main]]
 identifier = "contact"
 name = "Contact"
-url = "/cv/en/contact"
+url = "/en/contact"
+weight = 3
 
 [languages.br]
 languageName = "pt-BR"
@@ -143,11 +146,14 @@ logoHomeLink = "/cv/"
 identifier = "sobre"
 name = "Sobre"
 pageRef = "/sobre"
+weight = 1
 [[languages.br.menu.main]]
 identifier = "projetos"
 name = "Projetos"
 pageRef = "/projetos"
+weight = 2
 [[languages.br.menu.main]]
 identifier = "contato"
 name = "Contato"
 pageRef = "/contato"
+weight = 3
