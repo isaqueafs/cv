@@ -97,21 +97,21 @@ words = "words"
 
 [languages.en.params.logo]
 logoText = "dev Isaque Santos"
-logoHomeLink = "/"
+logoHomeLink = "/cv/en/"
 
 [languages.en.menu]
 [[languages.en.menu.main]]
 identifier = "about"
 name = "About"
-url = "/about"
+url = "/cv/en/about"
 [[languages.en.menu.main]]
 identifier = "showcase"
 name = "Showcase"
-url = "/showcase"
+url = "/cv/en/showcase"
 [[languages.en.menu.main]]
 identifier = "contact"
 name = "Contact"
-url = "/contact"
+url = "/cv/en/contact"
 
 [languages.br]
 languageName = "pt-BR"
@@ -136,7 +136,7 @@ words = "palavras"
 
 [languages.br.params.logo]
 logoText = "dev Isaque Santos"
-logoHomeLink = "/"
+logoHomeLink = "/cv/"
 
 [languages.br.menu]
 [[languages.br.menu.main]]
