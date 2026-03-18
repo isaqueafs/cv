@@ -1,0 +1,13 @@
+.navigation-menu a {
+    text-decoration: none !important;
+}
+
+.navigation-menu a:hover {
+    font-weight: bold !important;
+    text-decoration: underline !important;
+}
+
+.navigation-menu a.active {
+    font-weight: bold !important;
+    text-decoration: underline !important;
+}
