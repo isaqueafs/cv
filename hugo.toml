@@ -10,6 +10,13 @@ pagination.pagerSize = 5
 [markup.highlight]
 noClasses = false
 
+[markup]
+[markup.goldmark]
+[markup.goldmark.parser]
+[markup.goldmark.parser.attribute]
+block = true
+title = true
+
 [params]
 # dir name of your main content (default is `content/posts`).
 # the list of set content will show up on your index page (baseurl).
@@ -74,9 +81,9 @@ site = ""
 
 [languages]
 [languages.en]
-languageName = "en-US"
+languageName = "en-us"
 weight = 2
-title = "dev Isaque Santos"
+title = "Isaque Santos | dev web"
 contentDir = "content/en"
 
 
@@ -84,7 +91,7 @@ contentDir = "content/en"
 subtitle = "A simple, retro theme for Hugo"
 owner = ""
 keywords = ""
-copyright = "Isaque Santos :: Built with <a href='https://gohugo.io' target='_blank'>Hugo</a> :: Theme by <a target='_blank' href='https://github.com/panr'>Panr</a>"
+copyright = "Isaque Santos :: Built with <a href='https://gohugo.io' target='_blank'>Hugo</a>"
 menuMore = "Show more"
 readMore = "Read more"
 readOtherPosts = "Read other posts"
@@ -96,37 +103,42 @@ minuteReadingTime = "min read"
 words = "words"
 
 [languages.en.params.logo]
-logoText = "dev Isaque Santos"
+logoText = "ISAQUE SANTOS"
 logoHomeLink = "/cv/en/"
 
 [languages.en.menu]
 [[languages.en.menu.main]]
 identifier = "about"
-name = "About"
-url = "/en/about"
+name = "about"
+url = "#about"
 weight = 1
 [[languages.en.menu.main]]
-identifier = "showcase"
-name = "Showcase"
-url = "/en/showcase"
+identifier = "experience"
+name = "experience"
+url = "#experience"
 weight = 2
 [[languages.en.menu.main]]
-identifier = "contact"
-name = "Contact"
-url = "/en/contact"
+identifier = "projects"
+name = "projects"
+url = "#projects"
 weight = 3
+[[languages.en.menu.main]]
+identifier = "contact"
+name = "contact"
+url = "#contact"
+weight = 4
 
 [languages.br]
-languageName = "pt-BR"
+languageName = "pt-br"
 weight = 1
-title = "dev Isaque Santos"
+title = "Isaque Santos | dev web"
 contentDir = "content/br"
 
 [languages.br.params]
 subtitle = "CV do dev Isaque Santos"
 owner = ""
 keywords = ""
-copyright = "Isaque Santos :: Feito em <a href='https://gohugo.io' target='_blank'>Hugo</a> :: Tema por <a target='_blank' href='https://github.com/panr'>Panr</a>"
+copyright = "Isaque Santos :: Feito com <a href='https://gohugo.io' target='_blank'>Hugo</a>"
 menuMore = "Mostrar mais"
 readMore = "Leia mais"
 readOtherPosts = "Leia outras postagens"
@@ -138,22 +150,27 @@ minuteReadingTime = "min de leitura"
 words = "palavras"
 
 [languages.br.params.logo]
-logoText = "dev Isaque Santos"
+logoText = "ISAQUE SANTOS"
 logoHomeLink = "/cv/"
 
 [languages.br.menu]
 [[languages.br.menu.main]]
 identifier = "sobre"
-name = "Sobre"
-pageRef = "/sobre"
+name = "sobre"
+url = "#sobre"
 weight = 1
 [[languages.br.menu.main]]
-identifier = "projetos"
-name = "Projetos"
-pageRef = "/projetos"
+identifier = "experiencia"
+name = "experiência"
+url = "#experiencia"
 weight = 2
 [[languages.br.menu.main]]
-identifier = "contato"
-name = "Contato"
-pageRef = "/contato"
+identifier = "projetos"
+name = "projetos"
+url = "#projetos"
 weight = 3
+[[languages.br.menu.main]]
+identifier = "contato"
+name = "contato"
+url = "#contato"
+weight = 4

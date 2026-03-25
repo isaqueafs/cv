@@ -1,13 +1,83 @@
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(29, 185, 84, 0.4);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(29, 185, 84);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(29, 185, 84, 0.4) var(--background);
+}
+
+/* Sticky header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--background);
+  padding-bottom: 8px;
+}
+
+/* Section headings: scroll margin accounts for sticky header */
+.cv-content h2 {
+  scroll-margin-top: 72px;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  /* border-top: 1px solid rgba(29, 185, 84, 0.3); */
+  text-transform: lowercase;
+  color: rgb(29, 185, 84);
+}
+
+.cv-content h2::before {
+  content: ":: ";
+  color: rgba(236, 234, 229, 0.4);
+}
+
+/* First h2 doesn't need a top border */
+.cv-content h2:first-of-type {
+  border-top: none;
+  margin-top: 1.5rem;
+}
+
+/* Intro separator */
+.cv-content hr:first-of-type {
+  border-color: rgba(29, 185, 84, 0.3);
+  margin: 1.5rem 0;
+}
+
+/* Navigation links */
 .navigation-menu a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .navigation-menu a:hover {
-    font-weight: bold !important;
-    text-decoration: underline !important;
+  font-weight: bold !important;
+  text-decoration: underline !important;
 }
 
 .navigation-menu a.active {
-    font-weight: bold !important;
-    text-decoration: underline !important;
+  font-weight: bold !important;
+  text-decoration: underline !important;
+}
+
+.flex-list {
+  display: flex !important;
+  justify-content: space-between !important;
 }

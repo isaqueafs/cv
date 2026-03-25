@@ -1,0 +1,48 @@
+<script>
+(function () {
+  var sections = document.querySelectorAll('.cv-content h2[id]');
+  var navLinks = document.querySelectorAll('.navigation-menu a');
+
+  if (!sections.length || !navLinks.length) return;
+
+  var linkedIds = Array.from(navLinks).map(function (link) {
+    return link.getAttribute('href').replace('#', '');
+  });
+
+  function setActive() {
+    var scrollY = window.scrollY + 90;
+    var atBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 5;
+
+    var current = '';
+    sections.forEach(function (section) {
+      if (section.offsetTop <= scrollY) {
+        current = section.id;
+      }
+    });
+
+    // If at the bottom, force the last linked section active
+    if (atBottom) {
+      current = linkedIds[linkedIds.length - 1];
+    } else if (linkedIds.indexOf(current) === -1) {
+      // Current section has no nav link — keep the last linked section that was passed
+      var lastLinked = '';
+      sections.forEach(function (section) {
+        if (section.offsetTop <= scrollY && linkedIds.indexOf(section.id) !== -1) {
+          lastLinked = section.id;
+        }
+      });
+      current = lastLinked;
+    }
+
+    navLinks.forEach(function (link) {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+})();
+</script>
