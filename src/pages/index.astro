@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import HeaderControls from "../components/HeaderControls.astro";
 import Icon from "../components/Icon.astro";
 import ContactLinks from "../components/ContactLinks.astro";
+import TopoInfo from "../components/TopoInfo.astro";
 
 const year = new Date().getFullYear()
 
@@ -43,7 +44,7 @@ const skills = [
     title="Isaque Santos | dev web"
     description="Desenvolvedor web com 5+ anos de experiência, especializado em backend com PHP e Laravel: LMS, ERP, plataformas multi-tenant e integrações AWS."
     lang="pt-BR">
-    <main class="min-h-screen bg-canvas text-text">
+    <main class="min-h-screen text-text">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
             <!-- Intro -->
             <header class="mb-10 lg:mb-14">
@@ -63,7 +64,7 @@ const skills = [
                 <!-- Coluna principal -->
                 <div class="space-y-4 lg:space-y-6 min-w-0">
                     <!-- Sobre -->
-                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
+                    <div class="bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
                         <h2 class="text-meta text-accent uppercase tracking-widest mb-3"><span aria-hidden="true">&gt; </span>sobre</h2>
                         <p class="text-body text-text">
                             Desenvolvedor Web com mais de 5 anos de experiência técnica,
@@ -78,7 +79,7 @@ const skills = [
                     </div>
 
                     <!-- Experiência -->
-                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
+                    <div class="bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
                         <h2 class="text-meta text-accent uppercase tracking-widest mb-4"><span aria-hidden="true">&gt; </span>experiência · MoveEdu</h2>
                         <div class="space-y-6">
                             {experience.map(job => (
@@ -103,7 +104,7 @@ const skills = [
                 <!-- Coluna lateral -->
                 <aside aria-label="Detalhes do perfil" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6 items-start">
                     <!-- Skills -->
-                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised sm:col-span-2 lg:col-span-1">
+                    <div class="bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised sm:col-span-2 lg:col-span-1">
                         <h2 class="text-meta text-accent uppercase tracking-widest mb-5"><span aria-hidden="true">&gt; </span>skills</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
                             {skills.map(([group, items]) => (
@@ -120,7 +121,7 @@ const skills = [
                     </div>
 
                     <!-- Formação -->
-                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
+                    <div class="bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
                         <h2 class="text-meta text-accent uppercase tracking-widest mb-4"><span aria-hidden="true">&gt; </span>formação & certificações</h2>
                         <div class="space-y-3">
                             <div class="border-l border-border pl-4">
@@ -145,7 +146,7 @@ const skills = [
                     </div>
 
                     <!-- Idiomas -->
-                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
+                    <div class="bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
                         <h2 class="text-meta text-accent uppercase tracking-widest mb-4"><span aria-hidden="true">&gt; </span>idiomas</h2>
                         <div class="space-y-2">
                             <div class="flex items-center justify-between">
@@ -169,6 +170,7 @@ const skills = [
                 <p class="text-meta text-muted font-mono">© {year} Isaque Santos</p>
                 <ContactLinks />
             </footer>
+            <TopoInfo lang="pt-BR" />
         </div>
     </main>
 </Base>

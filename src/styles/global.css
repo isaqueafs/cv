@@ -24,10 +24,14 @@
 
 html {
     color-scheme: dark;
+    --topo-opacity: 0.13;
+    --topo-focus-opacity: 0.4;
 }
 
 html[data-theme="light"] {
     color-scheme: light;
+    --topo-opacity: 0.1;
+    --topo-focus-opacity: 0.3;
     --color-canvas:         #e4e0d9;
     --color-surface:        #f0ede8;
     --color-surface-raised: #f8f6f3;
@@ -69,26 +73,122 @@ html {
     }
 }
 
-.card-glow {
-    position: relative;
-    overflow: hidden;
-}
-
-.card-glow::before {
-    content: '';
-    position: absolute;
+/* Fundo topográfico: curvas geradas no cliente (Base.astro), na cor de destaque */
+.topo-bg {
+    position: fixed;
     inset: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    background: radial-gradient(
-        500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        color-mix(in srgb, var(--color-accent) 10%, transparent),
-        transparent 60%
-    );
+    z-index: -1;
     pointer-events: none;
-    border-radius: inherit;
+    color: var(--color-accent);
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card-glow:hover::before {
+.topo-bg.is-ready {
+    opacity: var(--topo-opacity);
+}
+
+/* canvas: relevo animado (topography-live.ts); svg: versão estática para movimento reduzido */
+.topo-bg canvas,
+.topo-bg svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.topo-bg path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.1;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .topo-bg {
+        transition: none;
+    }
+}
+
+@media print {
+    .topo-bg {
+        display: none;
+    }
+}
+
+/* Popover "sobre o fundo" (TopoInfo): o script do componente posiciona junto ao gatilho */
+.topo-info {
+    inset: auto;
+    margin: 0;
+    width: min(24rem, calc(100vw - 2rem));
+    padding: 1.25rem;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.25rem;
+    box-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.5);
+    opacity: 0;
+    translate: 0 0.5rem;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), translate 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        overlay 0.25s allow-discrete, display 0.25s allow-discrete;
+}
+
+.topo-info:popover-open {
     opacity: 1;
+    translate: 0 0;
+}
+
+@starting-style {
+    .topo-info:popover-open {
+        opacity: 0;
+        translate: 0 0.5rem;
+    }
+}
+
+html[data-theme="light"] .topo-info {
+    box-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .topo-info {
+        transition: none;
+    }
+}
+
+.topo-info-trigger {
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.5);
+}
+
+html[data-theme="light"] .topo-info-trigger {
+    box-shadow: 0 8px 24px -8px rgb(0 0 0 / 0.18);
+}
+
+/* Com o popover "sobre o fundo" aberto: conteúdo esmaece e o relevo aparece */
+main > div > :not(#topo-info-trigger, #topo-info) {
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.topo-focus main > div > :not(#topo-info-trigger, #topo-info) {
+    opacity: 0.12;
+}
+
+html.topo-focus .topo-bg.is-ready {
+    opacity: var(--topo-focus-opacity);
+    transition-duration: 0.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main > div > :not(#topo-info-trigger, #topo-info),
+    html.topo-focus .topo-bg.is-ready {
+        transition: none;
+    }
+}
+
+/* Páginas bilíngues numa só (404): o script da página define <html lang>; a variante do outro idioma some */
+html:not([lang='en']) [data-lang-variant='en'],
+html[lang='en'] [data-lang-variant='pt-BR'] {
+    display: none;
 }
