@@ -61,7 +61,7 @@ const variants = (key: Key) => langs.map(l => ({ l, text: dict[l][key], attr: la
         <h2 id="topo-info-title" class="text-meta text-accent uppercase tracking-widest">
             <span aria-hidden="true">&gt; </span>{variants('title').map(v => <span data-lang-variant={v.attr}>{v.text}</span>)}
         </h2>
-        <button type="button" popovertarget="topo-info" popovertargetaction="hide" aria-label={primary.close}
+        <button type="button" popovertarget="topo-info" popovertargetaction="hide" aria-label={primary.close} autofocus
                 data-label-pt={dict['pt-BR'].close} data-label-en={dict.en.close}
                 class="-m-1.5 p-1.5 text-muted hover:text-text transition-colors duration-150 pointer-coarse:-m-3 pointer-coarse:p-3">
             <Icon name="x" />

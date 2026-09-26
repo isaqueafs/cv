@@ -41,7 +41,7 @@ Toda a carreira até agora é na MoveEdu, com progressão de suporte técnico pa
 - Site estático em Astro 6 e Tailwind v4, sem framework de JS. É publicado no GitHub Pages sob o base path `/cv`. Esta é a segunda versão do site e substitui a original, que também ficava em `/cv`.
 - Bilíngue por duplicação de páginas: `src/pages/index.astro` (PT-BR) e `src/pages/en/index.astro` (EN-US). Toda mudança precisa ser espelhada nas duas.
 - Tema claro/escuro com persistência por cookie.
-- Canais de contato públicos: e-mail isaqueafsantos@gmail.com, linkedin.com/in/isaqueafs, github.com/isaqu3. O telefone consta no PDF, mas não é publicado no site.
+- Canais de contato públicos: e-mail isaqueafsantos@gmail.com, linkedin.com/in/isaqueafs, github.com/isaqu3. O telefone não aparece no HTML do site, mas os PDFs do currículo publicados para download (`public/isaque-santos-curriculo.pdf` e `public/isaque-santos-resume.pdf`) o incluem, por decisão do dono do site (set/2026).
 - Não há formulário de contato nem backend.
 
 ## Brand Commitments

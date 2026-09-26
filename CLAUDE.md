@@ -23,12 +23,14 @@ Node >= 22.12 is required. There is no test suite and no linter. Run `npm run bu
 - **404 is bilingual in a single page** (`src/pages/404.astro`). GitHub Pages serves only one `404.html`, so an `en/404` page would never be used.
   - Both versions are rendered, and an inline script sets `<html lang>` before paint: English under `/cv/en/`, otherwise the browser language decides (Portuguese → PT, anything else → EN).
   - Elements carry `data-lang-variant="pt-BR|en"`, and a global rule in `global.css` hides the variant that doesn't match `<html lang>`. Without JavaScript, PT is shown.
-- **Layout** (`src/layouts/Base.astro`): holds all `<head>` concerns (SEO/OG/Twitter meta built from props, canonical URL and `hreflang` alternates from `Astro.site`, Google Fonts) and an inline anti-flash theme script. That script reads a `theme` cookie (default `dark`) and sets `data-theme` on `<html>` before paint.
+- **Layout** (`src/layouts/Base.astro`): holds all `<head>` concerns (SEO/OG/Twitter meta built from props, with `og-pt.png`/`og-en.png` share cards in `public/` picked by `lang`, canonical URL and `hreflang` alternates from `Astro.site`, Google Fonts) and an inline anti-flash theme script. That script reads a `theme` cookie (default `dark`) and sets `data-theme` on `<html>` before paint.
 - **Page layout**:
   - The container is `max-w-6xl`.
   - From `lg` it becomes a two-column grid: a main column (about + experience) and a `20rem` `<aside>` (skills, education, languages).
   - Below `lg` everything stacks in DOM order, and the aside becomes a 2-column grid on `sm`.
-  - Contact links appear in the header and the footer via `src/components/ContactLinks.astro`.
+  - The header holds the contact actions and a proof list of 4 figures taken from the PDF résumé; don't round them up. A closing "Vamos conversar" / "Let’s talk" section repeats the actions before the footer.
+  - `src/components/ContactLinks.astro` (takes `lang`): the primary email button with a copy-to-clipboard button (announced via a `role=status` region), a LinkedIn secondary button, and tertiary links to the résumé PDF (size read from `public/` at build time) and GitHub.
+  - Structure: `.page` wraps `<header>`, `<main>`, `<footer>` and TopoInfo. The `.topo-focus` fade targets `.page > *`, so keep that wrapper class (the 404 uses it too).
 - **Topographic background**: `src/lib/topography.ts` builds contour-line path data. The look blends the rounded contours of the game *Hell Is Us* with a more organic, irregular flow.
   - The pipeline is 2-octave Perlin noise with domain warp, then marching squares, then one Chaikin pass, then Ramer–Douglas–Peucker simplification, output as Catmull-Rom cubic Béziers with 1-decimal coordinates. Integer coordinates and plain polylines looked jagged when the background is highlighted.
   - Levels sit 70% of the way from linear (p2–p98) toward quantile, so bands tighten and open up naturally without leaving empty areas.
@@ -49,8 +51,8 @@ Node >= 22.12 is required. There is no test suite and no linter. Run `npm run bu
   - The script flips `data-theme`, adds `theme-ready` (this enables the color transitions), writes the cookie, and keeps the toggle's `aria-label` in sync.
 - **Styling** (`src/styles/global.css`): Tailwind v4 through `@tailwindcss/vite`. There is no `tailwind.config`. Design tokens live in `@theme`:
   - colors: `canvas`, `surface`, `surface-raised`, `border`, `text`, `soft` (reading text), `muted` (metadata), `accent`, `accent-dim`
-  - type roles: `text-body` (15px/1.7, reading copy) and `text-meta` (13px, section headings, dates, chips)
-  - fonts: `font-display` (Bebas Neue) and DM Mono
+  - type roles: `text-body` (16px/1.65, reading copy) and `text-meta` (13px, section headings, dates, chips)
+  - fonts: `font-display` (Bebas Neue), DM Mono (the default, used for headings, metadata and chips) and `font-reading` (DM Sans) for running text. Cap reading measure in `rem` (`max-w-[36rem]` ≈ 70 chars), not `ch`: DM Sans digits are wide, so `64ch` still allows ~90 characters per line.
 
   Light mode overrides the same variables under `html[data-theme="light"]`. Use token classes rather than raw colors so both themes work. Every text/background pair meets WCAG AA (4.5:1) in both themes, including the card hover state, so recheck contrast whenever a color changes.
 - **Icons**: `src/components/Icon.astro` inlines the Tabler outline SVG paths the site uses (`<Icon name="mail" />`). There is no icon webfont. To add an icon, copy its paths from the `@tabler/icons` package into the map.

@@ -4,10 +4,12 @@
     --font-sans:     'DM Mono', ui-monospace, monospace;
     --font-mono:     'DM Mono', ui-monospace, monospace;
     --font-display:  'Bebas Neue', sans-serif;
+    /* Texto corrido (sobre, bullets): proporcional, da mesma família da DM Mono */
+    --font-reading:  'DM Sans', ui-sans-serif, system-ui, sans-serif;
 
     /* Papéis tipográficos: leitura corrida e metadados (títulos de seção, datas, chips) */
-    --text-body:                0.9375rem;
-    --text-body--line-height:   1.7;
+    --text-body:                1rem;
+    --text-body--line-height:   1.65;
     --text-meta:                0.8125rem;
     --text-meta--line-height:   1.5;
 
@@ -20,6 +22,8 @@
     --color-muted:          #a8a297;
     --color-accent:         #1db954;
     --color-accent-dim:     #0a2414;
+    /* Texto sobre fundo accent (botão de e-mail): 6.23:1 no escuro, 5.90:1 no claro */
+    --color-on-accent:      #212121;
 }
 
 html {
@@ -42,6 +46,7 @@ html[data-theme="light"] {
     --color-muted:          #524d46;
     --color-accent:         #126e31;
     --color-accent-dim:     #e6f4ec;
+    --color-on-accent:      #f8f6f3;
 }
 
 ::selection {
@@ -168,11 +173,11 @@ html[data-theme="light"] .topo-info-trigger {
 }
 
 /* Com o popover "sobre o fundo" aberto: conteúdo esmaece e o relevo aparece */
-main > div > :not(#topo-info-trigger, #topo-info) {
+.page > :not(#topo-info-trigger, #topo-info) {
     transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html.topo-focus main > div > :not(#topo-info-trigger, #topo-info) {
+html.topo-focus .page > :not(#topo-info-trigger, #topo-info) {
     opacity: 0.12;
 }
 
@@ -182,7 +187,7 @@ html.topo-focus .topo-bg.is-ready {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    main > div > :not(#topo-info-trigger, #topo-info),
+    .page > :not(#topo-info-trigger, #topo-info),
     html.topo-focus .topo-bg.is-ready {
         transition: none;
     }

@@ -1,28 +1,94 @@
 ---
+import { statSync } from 'node:fs'
+import { join } from 'node:path'
 import Icon from './Icon.astro'
 
 interface Props {
+    lang: 'pt-BR' | 'en'
     class?: string
 }
 
-const { class: className } = Astro.props
+const { lang, class: className } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const isPt = lang === 'pt-BR'
+const email = 'isaqueafsantos@gmail.com'
 
-const links = [
-    { href: 'mailto:isaqueafsantos@gmail.com', icon: 'mail', label: 'isaqueafsantos@gmail.com', external: false },
-    { href: 'https://linkedin.com/in/isaqueafs', icon: 'brand-linkedin', label: 'isaqueafs', external: true },
-    { href: 'https://github.com/isaqu3', icon: 'brand-github', label: 'isaqu3', external: true },
-] as const
+const t = isPt
+    ? { copy: 'Copiar e-mail', copied: 'E-mail copiado', newTab: '(abre em nova aba)', resume: 'currículo em PDF', pdf: 'isaque-santos-curriculo.pdf' }
+    : { copy: 'Copy email', copied: 'Email copied', newTab: '(opens in a new tab)', resume: 'résumé PDF', pdf: 'isaque-santos-resume.pdf' }
+
+// Tamanho do PDF lido no build, para o recrutador saber o que vai baixar
+let pdfSize = ''
+try {
+    pdfSize = `${Math.round(statSync(join(process.cwd(), 'public', t.pdf)).size / 1024)} KB`
+} catch {}
+
+const secondary = 'inline-flex items-center gap-2 min-h-10 px-4 rounded border border-border text-sm font-medium text-text hover:border-accent/50 hover:bg-surface transition-colors duration-150 pointer-coarse:min-h-11'
+const tertiary = 'inline-flex items-center gap-1.5 min-h-10 px-2 text-meta text-muted hover:text-text transition-colors duration-150 pointer-coarse:min-h-11'
 ---
 
-<ul class:list={['flex items-center gap-x-5 gap-y-1 flex-wrap', className]}>
-    {links.map(link => (
-        <li>
-            <a href={link.href}
-               {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-               class="flex items-center gap-1.5 text-meta text-muted hover:text-text transition-colors duration-150 pointer-coarse:min-h-11">
-                <Icon name={link.icon} class="text-accent" />
-                <span>{link.label}</span>
-            </a>
-        </li>
-    ))}
-</ul>
+<div class:list={['flex flex-wrap items-center gap-2', className]}>
+    <!-- Ação principal: e-mail, com cópia para quem não tem cliente de e-mail -->
+    <div class="inline-flex rounded bg-accent text-on-accent">
+        <a href={`mailto:${email}`}
+           class="inline-flex items-center gap-2 min-h-10 pl-4 pr-3 rounded-l text-sm font-medium hover:brightness-110 transition-[filter] duration-150 pointer-coarse:min-h-11">
+            <Icon name="mail" />
+            <span>{email}</span>
+        </a>
+        <button type="button" data-copy-email={email} aria-label={t.copy} title={t.copy}
+                data-label-copy={t.copy} data-label-copied={t.copied}
+                class="inline-flex items-center justify-center w-10 rounded-r border-l border-on-accent/25 hover:brightness-110 transition-[filter] duration-150 pointer-coarse:w-11">
+            <span data-copy-icon="idle"><Icon name="copy" /></span>
+            <span data-copy-icon="done" hidden><Icon name="check" /></span>
+        </button>
+        <span class="sr-only" role="status" data-copy-status></span>
+    </div>
+
+    <a href="https://linkedin.com/in/isaqueafs" target="_blank" rel="noopener noreferrer" class={secondary}>
+        <Icon name="brand-linkedin" class="text-accent" />
+        <span>LinkedIn</span>
+        <span class="sr-only">{t.newTab}</span>
+    </a>
+
+    <a href={`${base}/${t.pdf}`} class={tertiary}>
+        <Icon name="file-download" class="text-accent" />
+        <span>{t.resume}</span>
+        {pdfSize && <span class="text-muted/80">· {pdfSize}</span>}
+    </a>
+
+    <a href="https://github.com/isaqu3" target="_blank" rel="noopener noreferrer" class={tertiary}>
+        <Icon name="brand-github" class="text-accent" />
+        <span>GitHub</span>
+        <span class="sr-only">{t.newTab}</span>
+    </a>
+</div>
+
+<script>
+    // Mais de uma instância na página (topo e fechamento): cada botão cuida do seu status
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach(btn => {
+        const status = btn.parentElement?.querySelector<HTMLElement>('[data-copy-status]')
+        let timer: number | undefined
+
+        function show(done: boolean) {
+            btn.querySelectorAll<HTMLElement>('[data-copy-icon]').forEach(el => {
+                el.hidden = (el.dataset.copyIcon === 'done') !== done
+            })
+            const label = done ? btn.dataset.labelCopied! : btn.dataset.labelCopy!
+            btn.setAttribute('aria-label', label)
+            btn.title = label
+            if (status) status.textContent = done ? label : ''
+        }
+
+        btn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(btn.dataset.copyEmail!)
+            } catch {
+                // Sem permissão de área de transferência: o endereço segue visível no botão ao lado
+                return
+            }
+            show(true)
+            clearTimeout(timer)
+            timer = window.setTimeout(() => show(false), 2000)
+        })
+    })
+</script>
