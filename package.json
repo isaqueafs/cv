@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "dev:envkit": "astro dev --host 127.0.0.1 --port 5170 --allowed-hosts cv2.dev",
+    "dev:envkit": "astro dev --host 127.0.0.1 --port 5170 --allowed-hosts cv.dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

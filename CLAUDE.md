@@ -9,7 +9,7 @@ Personal portfolio/CV for Isaque Santos, a static Astro site in PT-BR and EN-US.
 ## Commands
 
 - `npm run dev`: dev server at `localhost:4321/cv/`
-- `npm run dev:envkit`: dev server used by the local EnvKit site `cv2` (binds `127.0.0.1:5170`, allows host `cv2.dev`; open <https://cv2.dev/cv/>)
+- `npm run dev:envkit`: dev server used by the local EnvKit site `cv` (binds `127.0.0.1:5170`, allows host `cv.dev`; open <https://cv.dev/cv/>)
 - `npm run build`: static build to `./dist/`, the same command CI runs
 - `npm run preview`: serve the built `dist/`
 - `npx astro check`: type-check `.astro` files (tsconfig extends `astro/tsconfigs/strict`); needs `@astrojs/check` + `typescript`, which are not installed yet
@@ -18,7 +18,7 @@ Node >= 22.12 is required. There is no test suite and no linter. Run `npm run bu
 
 ## Architecture
 
-- **Base path `/cv`**: `astro.config.mjs` sets `site` and `base: '/cv'` (GitHub Pages serves the repo `isaqueafs/cv` there; the local folder and EnvKit site are still named `cv2`). Internal links and assets must never be hardcoded. Each page, layout and component that links internally builds a `base` from `import.meta.env.BASE_URL.replace(/\/$/, '')` and uses it as `` href={`${base}/en/`} ``.
+- **Base path `/cv`**: `astro.config.mjs` sets `site` and `base: '/cv'` (GitHub Pages serves the repo `isaqueafs/cv` there; the local folder and EnvKit site are named `cv`, host `cv.dev`). Internal links and assets must never be hardcoded. Each page, layout and component that links internally builds a `base` from `import.meta.env.BASE_URL.replace(/\/$/, '')` and uses it as `` href={`${base}/en/`} ``.
 - **i18n is duplication, not a library**: `src/pages/index.astro` (PT-BR) and `src/pages/en/index.astro` (EN-US) are near-identical copies with translated text. Experience and skills are data arrays in each page's frontmatter. A content or structure change to one page must be mirrored in the other. Each page passes `lang` (and optionally `title`/`description`) to the layout.
 - **404 is bilingual in a single page** (`src/pages/404.astro`). GitHub Pages serves only one `404.html`, so an `en/404` page would never be used.
   - Both versions are rendered, and an inline script sets `<html lang>` before paint: English under `/cv/en/`, otherwise the browser language decides (Portuguese → PT, anything else → EN).
@@ -28,7 +28,7 @@ Node >= 22.12 is required. There is no test suite and no linter. Run `npm run bu
   - The container is `max-w-6xl`.
   - From `lg` it becomes a two-column grid: a main column (about + experience) and a `20rem` `<aside>` (skills, education, languages).
   - Below `lg` everything stacks in DOM order, and the aside becomes a 2-column grid on `sm`.
-  - The header holds the contact actions and a proof list of 4 figures taken from the PDF résumé; don't round them up. A closing "Vamos conversar" / "Let’s talk" section repeats the actions before the footer.
+  - The header holds the contact actions. Both pages keep a commented-out proof list of 4 figures from the PDF résumé (don't round them up) and a closing "Vamos conversar" / "Let’s talk" section repeating the actions before the footer; they're currently disabled, not deleted, so re-enabling one must be mirrored in the other page. The OG image alt text and the `og-pt.png`/`og-en.png` share cards still surface the same figures even though the on-page list is hidden.
   - `src/components/ContactLinks.astro` (takes `lang`): the primary email button with a copy-to-clipboard button (announced via a `role=status` region), a LinkedIn secondary button, and tertiary links to the résumé PDF (size read from `public/` at build time) and GitHub.
   - Structure: `.page` wraps `<header>`, `<main>`, `<footer>` and TopoInfo. The `.topo-focus` fade targets `.page > *`, so keep that wrapper class (the 404 uses it too).
 - **Topographic background**: `src/lib/topography.ts` builds contour-line path data. The look blends the rounded contours of the game *Hell Is Us* with a more organic, irregular flow.
