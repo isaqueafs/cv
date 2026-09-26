@@ -30,7 +30,7 @@ const experience = [
     },
     {
         role: 'Auxiliar de Desenvolvimento / Atendente Técnico',
-        period: '2020 – 2022',
+        period: '2020 – 2021',
         items: [
             [null, 'Desenvolvi rotinas e aplicações próprias para automação e otimização de processos de suporte e configuração interna.'],
             [null, 'Prestei suporte remoto para resolução de incidentes em aplicações de produção e configuração remota de servidores Windows e Linux.'],
@@ -87,7 +87,7 @@ const sectionTitle = 'text-meta text-accent uppercase tracking-widest'
                 <!-- Sobre -->
                 <section aria-labelledby="sobre" class={card}>
                     <h2 id="sobre" class:list={[sectionTitle, 'mb-3']}><span aria-hidden="true">&gt; </span>sobre</h2>
-                    <p class="font-reading text-body text-text max-w-[36rem]">
+                    <p class="font-reading text-body text-text">
                         Desenvolvedor Web com mais de 5 anos de experiência técnica,
                         especializado em backend com <span class="text-accent">PHP e Laravel</span>.
                         Forte atuação na arquitetura e evolução de ecossistemas complexos:
@@ -109,7 +109,7 @@ const sectionTitle = 'text-meta text-accent uppercase tracking-widest'
                                     <h3 class="text-body font-medium text-text">{job.role}</h3>
                                     <span class="text-meta text-muted font-mono shrink-0">{job.period}</span>
                                 </div>
-                                <ul class="space-y-2 max-w-[36rem]">
+                                <ul class="space-y-2">
                                     {job.items.map(([label, text]) => (
                                         <li class="font-reading text-body text-soft">
                                             {label && <span class="font-medium text-text">{label}: </span>}{text}
@@ -188,10 +188,10 @@ const sectionTitle = 'text-meta text-accent uppercase tracking-widest'
             </aside>
 
             <!-- Fechamento: a ação que o site existe para provocar -->
-            <section aria-labelledby="contato" class="lg:col-span-2 mt-6 lg:mt-8 pt-8 lg:pt-10 border-t border-border">
+            <!-- <section aria-labelledby="contato" class="lg:col-span-2 mt-6 lg:mt-8 pt-8 lg:pt-10 border-t border-border">
                 <h2 id="contato" class="font-display text-4xl sm:text-5xl tracking-wide leading-none text-text">Vamos conversar</h2>
                 <ContactLinks lang="pt-BR" class="mt-6" />
-            </section>
+            </section> -->
         </main>
 
         <footer class="mt-10 lg:mt-14">

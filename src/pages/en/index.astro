@@ -30,7 +30,7 @@ const experience = [
     },
     {
         role: 'Junior Developer / Technical Support',
-        period: '2020 – 2022',
+        period: '2020 – 2021',
         items: [
             [null, 'Built in-house routines and applications to automate and streamline support and internal configuration processes.'],
             [null, 'Provided remote support for incident resolution in production applications and remote configuration of Windows and Linux servers.'],
@@ -87,7 +87,7 @@ const sectionTitle = 'text-meta text-accent uppercase tracking-widest'
                 <!-- About -->
                 <section aria-labelledby="about" class={card}>
                     <h2 id="about" class:list={[sectionTitle, 'mb-3']}><span aria-hidden="true">&gt; </span>about</h2>
-                    <p class="font-reading text-body text-text max-w-[36rem]">
+                    <p class="font-reading text-body text-text">
                         Web developer with 5+ years of hands-on experience, specialized in backend
                         development with <span class="text-accent">PHP and Laravel</span>. Strong track
                         record architecting and evolving complex ecosystems: LMS, ERP, ATS, admin panels
@@ -108,7 +108,7 @@ const sectionTitle = 'text-meta text-accent uppercase tracking-widest'
                                     <h3 class="text-body font-medium text-text">{job.role}</h3>
                                     <span class="text-meta text-muted font-mono shrink-0">{job.period}</span>
                                 </div>
-                                <ul class="space-y-2 max-w-[36rem]">
+                                <ul class="space-y-2">
                                     {job.items.map(([label, text]) => (
                                         <li class="font-reading text-body text-soft">
                                             {label && <span class="font-medium text-text">{label}: </span>}{text}
@@ -187,10 +187,10 @@ const sectionTitle = 'text-meta text-accent uppercase tracking-widest'
             </aside>
 
             <!-- Closing: the action the site exists to prompt -->
-            <section aria-labelledby="contact" class="lg:col-span-2 mt-6 lg:mt-8 pt-8 lg:pt-10 border-t border-border">
+            <!-- <section aria-labelledby="contact" class="lg:col-span-2 mt-6 lg:mt-8 pt-8 lg:pt-10 border-t border-border">
                 <h2 id="contact" class="font-display text-4xl sm:text-5xl tracking-wide leading-none text-text">Let’s talk</h2>
                 <ContactLinks lang="en" class="mt-6" />
-            </section>
+            </section> -->
         </main>
 
         <footer class="mt-10 lg:mt-14">

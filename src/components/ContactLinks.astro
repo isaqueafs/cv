@@ -14,8 +14,8 @@ const isPt = lang === 'pt-BR'
 const email = 'isaqueafsantos@gmail.com'
 
 const t = isPt
-    ? { copy: 'Copiar e-mail', copied: 'E-mail copiado', newTab: '(abre em nova aba)', resume: 'currículo em PDF', pdf: 'isaque-santos-curriculo.pdf' }
-    : { copy: 'Copy email', copied: 'Email copied', newTab: '(opens in a new tab)', resume: 'résumé PDF', pdf: 'isaque-santos-resume.pdf' }
+    ? { copy: 'Copiar e-mail', copied: 'E-mail copiado', newTab: '(abre em nova aba)', resume: 'baixar currículo', pdf: 'isaque-santos-curriculo.pdf', saveAs: 'Isaque Santos - Currículo.pdf' }
+    : { copy: 'Copy email', copied: 'Email copied', newTab: '(opens in a new tab)', resume: 'download résumé', pdf: 'isaque-santos-resume.pdf', saveAs: 'Isaque Santos - Resume.pdf' }
 
 // Tamanho do PDF lido no build, para o recrutador saber o que vai baixar
 let pdfSize = ''
@@ -50,10 +50,11 @@ const tertiary = 'inline-flex items-center gap-1.5 min-h-10 px-2 text-meta text-
         <span class="sr-only">{t.newTab}</span>
     </a>
 
-    <a href={`${base}/${t.pdf}`} class={tertiary}>
+    <!-- download: baixa em vez de abrir o PDF no lugar da página -->
+    <a href={`${base}/${t.pdf}`} download={t.saveAs} type="application/pdf" class={tertiary}>
         <Icon name="file-download" class="text-accent" />
         <span>{t.resume}</span>
-        {pdfSize && <span class="text-muted/80">· {pdfSize}</span>}
+        <span class="text-muted/80">· PDF{pdfSize && ` ${pdfSize}`}</span>
     </a>
 
     <a href="https://github.com/isaqu3" target="_blank" rel="noopener noreferrer" class={tertiary}>
