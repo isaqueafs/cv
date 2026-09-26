@@ -36,7 +36,7 @@ Node >= 22.12 is required. There is no test suite and no linter. Run `npm run bu
   - A client script in `Base.astro` calls it with a random seed on every page load, in `requestIdleCallback` so it stays off the critical path.
   - It draws into the fixed `.topo-bg` layer as an inline SVG stroked with `currentColor`, i.e. the accent color.
   - The long side is fixed at 1600 units so the cost doesn't grow on tall phones.
-  - Opacity comes from `--topo-opacity` per theme. Light mode is capped at 0.10 so muted text crossing a line stays ≥4.5:1.
+  - Opacity comes from `--topo-opacity` per theme. Light mode uses 0.22 (line contrast 1.35:1, visible on low-contrast monitors), with `muted` darkened to `#524d46` so muted text crossing a line stays ≥4.5:1. Recompute that pair if either color changes.
   - The background is intentionally static. A slow drift and an evolving 3D-noise terrain were both tried and rejected: the moving contours felt psychedelic and could cause motion discomfort. Don't reintroduce background animation unless asked.
 - **TopoInfo** (`src/components/TopoInfo.astro`): a round floating button, fixed bottom-right, that opens a popover explaining the background (inspiration, how it's built, and the unique seed code).
   - Each page renders it: index pages pass their language, and the 404 passes `lang="auto"`, which renders every text in both languages as `data-lang-variant` spans and syncs the `aria-label`s with `<html lang>` in its script.

@@ -30,15 +30,16 @@ html {
 
 html[data-theme="light"] {
     color-scheme: light;
-    --topo-opacity: 0.1;
-    --topo-focus-opacity: 0.3;
+    /* Linhas a 22% (1.35:1 no fundo); muted escurecido para seguir ≥4.5:1 quando cruza uma linha */
+    --topo-opacity: 0.22;
+    --topo-focus-opacity: 0.45;
     --color-canvas:         #e4e0d9;
     --color-surface:        #f0ede8;
     --color-surface-raised: #f8f6f3;
     --color-border:         #cdc7be;
     --color-text:           #1c1b19;
     --color-soft:           #3a3732;
-    --color-muted:          #5f5a52;
+    --color-muted:          #524d46;
     --color-accent:         #126e31;
     --color-accent-dim:     #e6f4ec;
 }
