@@ -1,8 +1,8 @@
-# cv2 — Isaque Santos
+# cv — Isaque Santos
 
 Portfolio/CV pessoal, disponível em PT-BR e EN-US.
 
-**Live:** [isaqueafs.github.io/cv2](https://isaqueafs.github.io/cv2)
+**Live:** [isaqueafs.github.io/cv](https://isaqueafs.github.io/cv)
 
 ## Stack
 
@@ -24,8 +24,8 @@ Portfolio/CV pessoal, disponível em PT-BR e EN-US.
 
 | Rota      | Descrição        |
 | :-------- | :--------------- |
-| `/cv2/`   | Versão PT-BR     |
-| `/cv2/en/`| Versão EN-US     |
+| `/cv/`    | Versão PT-BR     |
+| `/cv/en/` | Versão EN-US     |
 
 ## Deploy
 

@@ -4,12 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Personal portfolio/CV for Isaque Santos, a static Astro site in PT-BR and EN-US. It deploys to GitHub Pages at <https://isaqueafs.github.io/cv2>. The README and commit messages are in Portuguese.
+Personal portfolio/CV for Isaque Santos, a static Astro site in PT-BR and EN-US. It deploys to GitHub Pages at <https://isaqueafs.github.io/cv>. The README and commit messages are in Portuguese.
 
 ## Commands
 
-- `npm run dev`: dev server at `localhost:4321/cv2/`
-- `npm run dev:envkit`: dev server used by the local EnvKit site `cv2` (binds `127.0.0.1:5170`, allows host `cv2.dev`; open <https://cv2.dev/cv2/>)
+- `npm run dev`: dev server at `localhost:4321/cv/`
+- `npm run dev:envkit`: dev server used by the local EnvKit site `cv2` (binds `127.0.0.1:5170`, allows host `cv2.dev`; open <https://cv2.dev/cv/>)
 - `npm run build`: static build to `./dist/`, the same command CI runs
 - `npm run preview`: serve the built `dist/`
 - `npx astro check`: type-check `.astro` files (tsconfig extends `astro/tsconfigs/strict`); needs `@astrojs/check` + `typescript`, which are not installed yet
@@ -18,7 +18,7 @@ Node >= 22.12 is required. There is no test suite and no linter. Run `npm run bu
 
 ## Architecture
 
-- **Base path `/cv2`**: `astro.config.mjs` sets `site` and `base: '/cv2'`. Internal links and assets must never be hardcoded. Each page, layout and component that links internally builds a `base` from `import.meta.env.BASE_URL.replace(/\/$/, '')` and uses it as `` href={`${base}/en/`} ``.
+- **Base path `/cv`**: `astro.config.mjs` sets `site` and `base: '/cv'` (GitHub Pages serves the repo `isaqueafs/cv` there; the local folder and EnvKit site are still named `cv2`). Internal links and assets must never be hardcoded. Each page, layout and component that links internally builds a `base` from `import.meta.env.BASE_URL.replace(/\/$/, '')` and uses it as `` href={`${base}/en/`} ``.
 - **i18n is duplication, not a library**: `src/pages/index.astro` (PT-BR) and `src/pages/en/index.astro` (EN-US) are near-identical copies with translated text. Experience and skills are data arrays in each page's frontmatter. A content or structure change to one page must be mirrored in the other. Each page passes `lang` (and optionally `title`/`description`) to the layout.
 - **Layout** (`src/layouts/Base.astro`): holds all `<head>` concerns (SEO/OG/Twitter meta built from props, canonical URL and `hreflang` alternates from `Astro.site`, Google Fonts) and two inline scripts:
   - an anti-flash theme script that reads a `theme` cookie (default `dark`) and sets `data-theme` on `<html>` before paint

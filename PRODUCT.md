@@ -10,7 +10,7 @@ web
 
 Primary: recrutadores e pessoas de RH no Brasil fazendo a triagem de candidatos a vagas de desenvolvimento web/backend. Normalmente chegam pelo link do currículo em PDF ou do LinkedIn e decidem em pouco tempo se a pessoa vale uma conversa.
 
-Secondary: recrutadores de fora do Brasil, atendidos pela versão EN-US (`/cv2/en/`). O EN-US complementa o PT-BR, que é a versão principal.
+Secondary: recrutadores de fora do Brasil, atendidos pela versão EN-US (`/cv/en/`). O EN-US complementa o PT-BR, que é a versão principal.
 
 ## Product Purpose
 
@@ -38,7 +38,7 @@ Toda a carreira até agora é na MoveEdu, com progressão de suporte técnico pa
 
 ## Capabilities and Constraints
 
-- Site estático em Astro 6, Tailwind v4 e Alpine.js (este ainda sem uso). É publicado no GitHub Pages sob o base path `/cv2`.
+- Site estático em Astro 6 e Tailwind v4, sem framework de JS. É publicado no GitHub Pages sob o base path `/cv`. Esta é a segunda versão do site e substitui a original, que também ficava em `/cv`.
 - Bilíngue por duplicação de páginas: `src/pages/index.astro` (PT-BR) e `src/pages/en/index.astro` (EN-US). Toda mudança precisa ser espelhada nas duas.
 - Tema claro/escuro com persistência por cookie.
 - Canais de contato públicos: e-mail isaqueafsantos@gmail.com, linkedin.com/in/isaqueafs, github.com/isaqu3. O telefone consta no PDF, mas não é publicado no site.
