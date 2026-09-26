@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro'
+
+interface Props {
+    class?: string
+}
+
+const { class: className } = Astro.props
+
+const links = [
+    { href: 'mailto:isaqueafsantos@gmail.com', icon: 'mail', label: 'isaqueafsantos@gmail.com', external: false },
+    { href: 'https://linkedin.com/in/isaqueafs', icon: 'brand-linkedin', label: 'isaqueafs', external: true },
+    { href: 'https://github.com/isaqu3', icon: 'brand-github', label: 'isaqu3', external: true },
+] as const
+---
+
+<ul class:list={['flex items-center gap-x-5 gap-y-1 flex-wrap', className]}>
+    {links.map(link => (
+        <li>
+            <a href={link.href}
+               {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+               class="flex items-center gap-1.5 text-meta text-muted hover:text-text transition-colors duration-150 pointer-coarse:min-h-11">
+                <Icon name={link.icon} class="text-accent" />
+                <span>{link.label}</span>
+            </a>
+        </li>
+    ))}
+</ul>

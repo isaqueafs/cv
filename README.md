@@ -8,7 +8,7 @@ Portfolio/CV pessoal, disponível em PT-BR e EN-US.
 
 - [Astro](https://astro.build) — framework
 - [Tailwind CSS v4](https://tailwindcss.com) — estilos
-- [Alpine.js](https://alpinejs.dev) — interatividade
+- Scripts inline mínimos (tema e efeito dos cards), sem framework JS
 - GitHub Actions — deploy automático para GitHub Pages
 
 ## Comandos

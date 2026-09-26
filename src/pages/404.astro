@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro'
+import Icon from '../components/Icon.astro'
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 ---
@@ -10,31 +11,31 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 
             <div class="bg-surface border border-accent/30 rounded p-8">
 
-                <p class="text-xs text-muted uppercase tracking-widest mb-6"> > 404 not found</p>
+                <p class="text-meta text-muted uppercase tracking-widest mb-6"> > 404 not found</p>
 
-                <h1 class="font-display text-8xl text-accent leading-none tracking-wide mb-1">
+                <h1 class="font-display text-7xl sm:text-8xl text-accent leading-none tracking-wide mb-1">
                     PERDIDO?
                 </h1>
 
-                <p class="text-xs text-muted font-mono mb-6 leading-relaxed">
+                <p class="text-body text-muted mb-6">
                     Essa rota não existe. Mas quem sabe você estava
                     procurando pelo dev que a construiu.
                 </p>
 
                 <div class="border-t border-border pt-5 space-y-2">
                     <a href={`${base}/`}
-                       class="flex items-center gap-3 text-sm text-muted hover:text-text transition-colors duration-150 group">
-                        <i class="ti ti-home text-accent/70 text-base w-4 group-hover:text-accent transition-colors duration-150"></i>
+                       class="flex items-center gap-3 min-h-11 text-sm text-muted hover:text-text transition-colors duration-150 group">
+                        <Icon name="home" class="text-accent text-base w-4 transition-colors duration-150" />
                         <span>isaque santos · dev web</span>
                     </a>
                     <a href={`${base}/#contato`}
-                       class="flex items-center gap-3 text-sm text-muted hover:text-text transition-colors duration-150 group">
-                        <i class="ti ti-mail text-accent/70 text-base w-4 group-hover:text-accent transition-colors duration-150"></i>
+                       class="flex items-center gap-3 min-h-11 text-sm text-muted hover:text-text transition-colors duration-150 group">
+                        <Icon name="mail" class="text-accent text-base w-4 transition-colors duration-150" />
                         <span>isaqueafsantos@gmail.com</span>
                     </a>
                     <a href={`${base}/en/`}
-                       class="flex items-center gap-3 text-sm text-muted hover:text-text transition-colors duration-150 group">
-                        <i class="ti ti-world text-accent/70 text-base w-4 group-hover:text-accent transition-colors duration-150"></i>
+                       class="flex items-center gap-3 min-h-11 text-sm text-muted hover:text-text transition-colors duration-150 group">
+                        <Icon name="world" class="text-accent text-base w-4 transition-colors duration-150" />
                         <span>switch to english version</span>
                     </a>
                 </div>

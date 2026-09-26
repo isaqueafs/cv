@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css'
-import '@tabler/icons-webfont/dist/tabler-icons.css'
 
 interface Props {
     title?: string
@@ -10,7 +9,7 @@ interface Props {
 
 const {
     title = 'Isaque Santos | dev web',
-    description = 'Dev web full-stack com 5+ anos de experiência em PHP, JavaScript, Laravel e Go.',
+    description = 'Desenvolvedor web com 5+ anos de experiência, especializado em backend com PHP e Laravel.',
     lang = 'pt-BR',
 } = Astro.props
 
@@ -29,6 +28,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalURL} />
+        <link rel="alternate" hreflang="pt-BR" href={new URL(`${base}/`, Astro.site)} />
+        <link rel="alternate" hreflang="en" href={new URL(`${base}/en/`, Astro.site)} />
+        <link rel="alternate" hreflang="x-default" href={new URL(`${base}/`, Astro.site)} />
 
         <!-- Open Graph -->
         <meta property="og:type" content="website" />
@@ -46,19 +48,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap"
             rel="stylesheet"
         />
 
-        <!-- Spotlight nos cards -->
+        <!-- Spotlight nos cards: só o card sob o cursor, uma escrita por frame, só em mouse -->
         <script is:inline>
-            document.addEventListener('mousemove', function (e) {
-                document.querySelectorAll('.card-glow').forEach(function (card) {
-                    var rect = card.getBoundingClientRect()
-                    card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px')
-                    card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px')
-                })
-            })
+            if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                var pending = null
+                document.addEventListener('pointermove', function (e) {
+                    var card = e.target.closest && e.target.closest('.card-glow')
+                    if (!card) return
+                    if (!pending) requestAnimationFrame(function () {
+                        var rect = pending.card.getBoundingClientRect()
+                        pending.card.style.setProperty('--mouse-x', (pending.x - rect.left) + 'px')
+                        pending.card.style.setProperty('--mouse-y', (pending.y - rect.top) + 'px')
+                        pending = null
+                    })
+                    pending = { card: card, x: e.clientX, y: e.clientY }
+                }, { passive: true })
+            }
         </script>
 
         <!-- Anti-flash tema -->

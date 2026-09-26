@@ -7,16 +7,13 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "dev:envkit": "astro dev --host 127.0.0.1 --port 5170 --allowed-hosts cv2.dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/alpinejs": "^0.5.0",
-    "@tabler/icons-webfont": "^3.41.1",
     "@tailwindcss/vite": "^4.2.2",
-    "@types/alpinejs": "^3.13.11",
-    "alpinejs": "^3.15.10",
     "astro": "^6.1.2",
     "tailwindcss": "^4.2.2"
   }

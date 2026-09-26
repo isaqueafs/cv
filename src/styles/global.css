@@ -5,25 +5,53 @@
     --font-mono:     'DM Mono', ui-monospace, monospace;
     --font-display:  'Bebas Neue', sans-serif;
 
+    /* Papéis tipográficos: leitura corrida e metadados (títulos de seção, datas, chips) */
+    --text-body:                0.9375rem;
+    --text-body--line-height:   1.7;
+    --text-meta:                0.8125rem;
+    --text-meta--line-height:   1.5;
+
     --color-canvas:         #212121;
     --color-surface:        #2b2b2b;
     --color-surface-raised: #353535;
     --color-border:         #3d3d3d;
     --color-text:           #e8e4d9;
-    --color-muted:          #918b82;
+    --color-soft:           #c9c4b8;
+    --color-muted:          #a8a297;
     --color-accent:         #1db954;
     --color-accent-dim:     #0a2414;
 }
 
+html {
+    color-scheme: dark;
+}
+
 html[data-theme="light"] {
+    color-scheme: light;
     --color-canvas:         #e4e0d9;
     --color-surface:        #f0ede8;
     --color-surface-raised: #f8f6f3;
     --color-border:         #cdc7be;
     --color-text:           #1c1b19;
-    --color-muted:          #6e6860;
+    --color-soft:           #3a3732;
+    --color-muted:          #5f5a52;
     --color-accent:         #126e31;
     --color-accent-dim:     #e6f4ec;
+}
+
+::selection {
+    background-color: var(--color-accent);
+    color: var(--color-canvas);
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+html {
+    scrollbar-color: var(--color-border) var(--color-canvas);
 }
 
 html.theme-ready,
@@ -33,7 +61,12 @@ html.theme-ready body {
 
 html {
     scroll-behavior: smooth;
-    zoom: 1.1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 .card-glow {

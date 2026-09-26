@@ -1,207 +1,177 @@
 ---
 import Base from '../../layouts/Base.astro'
+import HeaderControls from '../../components/HeaderControls.astro'
+import Icon from '../../components/Icon.astro'
+import ContactLinks from '../../components/ContactLinks.astro'
 
 const year = new Date().getFullYear()
-const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+const experience = [
+    {
+        role: 'Development Analyst / Lead Developer',
+        period: '2021 – present',
+        items: [
+            ['Corporate LMS', 'owned 95%+ of the codebase and commits over 3 years building a Laravel/PHP LMS / corporate university platform used to train employees and franchisees of a multi-brand education network.'],
+            ['Multi-tenant architecture & access control', 'designed and implemented a multi-tenant architecture for multiple brands/franchises, with hierarchical RBAC (User, Admin, Super Admin).'],
+            ['AI-assisted development', 'introduced generative AI into the software lifecycle: custom Skills, MCP servers and tools — accelerating testing, refactoring and technical documentation.'],
+            ['Media & streaming pipeline', 'built the full educational video pipeline (upload, streaming and progress tracking), leading the provider migration and the automated backup routine on AWS S3.'],
+            ['Multi-brand ERP', 'responsible since rollout for the development and evolution of the multi-brand portal (6 franchise networks) integrating 9 databases and external systems (TOTVS ERP, WhatsApp Cloud API) in PHP 8/Twig, authoring ~70% of the project\'s commits across nearly 3 years of continuous operation.'],
+            ['Integrations & legacy', 'led the restructuring of legacy projects and integrated external authentication (SSO) across brands and legacy ecosystems.'],
+        ],
+    },
+    {
+        role: 'Junior Developer / Technical Support',
+        period: '2020 – 2022',
+        items: [
+            [null, 'Built in-house routines and applications to automate and streamline support and internal configuration processes.'],
+            [null, 'Provided remote support for incident resolution in production applications and remote configuration of Windows and Linux servers.'],
+        ],
+    },
+]
+
+const skills = [
+    ['backend', ['PHP', 'Laravel', 'Go', 'Ruby', 'Ruby on Rails']],
+    ['frontend', ['JavaScript (jQuery)', 'Sass', 'Bootstrap', 'Tailwind', 'Livewire', 'Vue']],
+    ['databases', ['MySQL', 'PostgreSQL']],
+    ['infra & devops', ['AWS', 'Docker', 'Linux']],
+    ['ai & automation', ['Claude Code', 'OpenAI Codex', 'MCP', 'Custom Skills', 'AI-assisted docs', 'Workflow automation']],
+    ['architecture & integrations', ['Multi-tenancy', 'SSO', 'PWA', 'REST APIs', 'Webhooks', 'Vimeo', 'Gumlet']],
+] as const
 ---
 
-<Base title="Isaque Santos | web dev" description="Full-stack web developer with 5+ years of experience in PHP, JavaScript, Laravel and Go." lang="en">
+<Base
+    title="Isaque Santos | web dev"
+    description="Web developer with 5+ years of experience, specialized in backend with PHP and Laravel: LMS, ERP, multi-tenant platforms and AWS integrations."
+    lang="en">
     <main class="min-h-screen bg-canvas text-text">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 py-10 space-y-4">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
 
             <!-- Intro -->
-            <div class="mb-8">
+            <header class="mb-10 lg:mb-14">
                 <div class="flex items-start justify-between gap-4 mb-3">
-                    <h1 class="font-display text-5xl text-accent tracking-wide leading-none">
+                    <h1 class="font-display text-5xl sm:text-6xl text-accent tracking-wide leading-none">
                         Isaque Santos
                     </h1>
-                    <div class="flex items-center gap-3 pt-1 shrink-0">
-                        <div class="text-xs font-mono text-muted flex items-center gap-1">
-                            <a href={`${base}/`} class="hover:text-text transition-colors duration-150">pt-br</a>
-                            <span>/</span>
-                            <a href={`${base}/en/`} class="text-text">en-us</a>
-                        </div>
-                        <button
-                            id="theme-toggle"
-                            class="text-muted hover:text-text text-xs font-mono border border-border rounded px-2 py-0.5 hover:border-accent/40 transition-colors duration-150">
-                        </button>
-                    </div>
+                    <HeaderControls lang="en" />
                 </div>
-                <p class="text-sm text-text/70 font-mono">
-                    Full-Stack Web Developer · São José do Rio Preto, Brazil · PHP, JavaScript · 5+ years
+                <p class="text-sm text-text/70 font-mono text-pretty">
+                    Web Developer · Backend Software Engineer
                 </p>
+                <ContactLinks class="mt-5" />
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_20rem] gap-4 lg:gap-6 items-start">
+
+                <!-- Main column -->
+                <div class="space-y-4 lg:space-y-6 min-w-0">
+                    <!-- About -->
+                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
+                        <h2 class="text-meta text-accent uppercase tracking-widest mb-3"><span aria-hidden="true">&gt; </span>about</h2>
+                        <p class="text-body text-text">
+                            Web developer with 5+ years of hands-on experience, specialized in backend
+                            development with <span class="text-accent">PHP and Laravel</span>. Strong track
+                            record architecting and evolving complex ecosystems: LMS, ERP, ATS, admin panels
+                            and B2B/multi-tenant platforms. Solid experience modernizing legacy systems,
+                            integrating AWS services, building video/streaming pipelines and optimizing
+                            relational databases (MySQL/PostgreSQL). Experienced in AI-assisted software
+                            engineering (Claude Code, MCP, custom Skills and automations).
+                        </p>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
+                        <h2 class="text-meta text-accent uppercase tracking-widest mb-4"><span aria-hidden="true">&gt; </span>experience · MoveEdu</h2>
+                        <div class="space-y-6">
+                            {experience.map(job => (
+                                <div class="border-l border-border pl-4">
+                                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-4 gap-y-0.5 mb-2">
+                                        <h3 class="text-body font-medium text-text">{job.role}</h3>
+                                        <span class="text-meta text-muted font-mono shrink-0">{job.period}</span>
+                                    </div>
+                                    <ul class="space-y-1.5">
+                                        {job.items.map(([label, text]) => (
+                                            <li class="text-body text-soft">
+                                                {label && <span class="text-text">{label}: </span>}{text}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side column -->
+                <aside aria-label="Profile details" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6 items-start">
+                    <!-- Skills -->
+                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised sm:col-span-2 lg:col-span-1">
+                        <h2 class="text-meta text-accent uppercase tracking-widest mb-5"><span aria-hidden="true">&gt; </span>skills</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-5">
+                            {skills.map(([group, items]) => (
+                                <div>
+                                    <p class="text-meta text-muted font-mono mb-2">{group}</p>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        {items.map(s => (
+                                            <span class="text-meta font-mono text-text bg-canvas border border-border rounded px-2 py-0.5">{s}</span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
+                        <h2 class="text-meta text-accent uppercase tracking-widest mb-4"><span aria-hidden="true">&gt; </span>education & certs</h2>
+                        <div class="space-y-3">
+                            <div class="border-l border-border pl-4">
+                                <div class="flex items-baseline justify-between gap-4">
+                                    <span class="text-sm font-medium text-text">Senac</span>
+                                    <span class="text-meta text-muted font-mono shrink-0">2020</span>
+                                </div>
+                                <p class="text-sm text-muted mt-0.5">Technical Degree in Information Technology</p>
+                            </div>
+                            <div class="border-l border-border pl-4">
+                                <div class="flex items-baseline justify-between gap-4">
+                                    <a href="https://cursos.alura.com.br/user/isaque-santos0/fullCertificate/2d3211521741cb72f0c2c6a8b673279d"
+                                       target="_blank" rel="noopener noreferrer"
+                                       class="inline-flex items-center gap-1 text-sm font-medium text-text hover:text-accent transition-colors duration-150">
+                                        Alura <Icon name="external-link" class="text-xs" />
+                                    </a>
+                                    <span class="text-meta text-muted font-mono shrink-0">ongoing</span>
+                                </div>
+                                <p class="text-sm text-muted mt-0.5">Continuing specialization in DevOps and web technologies</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="card-glow bg-surface border border-border rounded p-5 lg:p-6 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
+                        <h2 class="text-meta text-accent uppercase tracking-widest mb-4"><span aria-hidden="true">&gt; </span>languages</h2>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-text">Portuguese</span>
+                                <span class="text-meta text-muted font-mono">Native</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-text">English</span>
+                                <span class="text-meta text-muted font-mono">Advanced · C1</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-text">Spanish</span>
+                                <span class="text-meta text-muted font-mono">Basic · A2</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
             </div>
 
-            <!-- Card grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                <!-- About -->
-                <div class="card-glow bg-surface border border-border rounded p-5 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised sm:col-span-2">
-                    <p class="text-xs text-muted uppercase tracking-widest mb-3"><span class="text-accent"> > about</span></p>
-                    <p class="text-sm text-text leading-relaxed">
-                        Passionate developer focused on building web products that actually work.
-                        I work with PHP and JavaScript daily, always striving for clean code and
-                        solutions that make sense for the business.
-                    </p>
-                </div>
-
-                <!-- Experience -->
-                <div class="card-glow bg-surface border border-border rounded p-5 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised sm:col-span-2">
-                    <p class="text-xs text-muted uppercase tracking-widest mb-4"><span class="text-accent"> > experience</span></p>
-                    <div class="border-l border-border pl-4">
-                        <div class="flex items-baseline justify-between gap-4 mb-1.5">
-                            <span class="text-sm font-medium text-text">MoveEdu</span>
-                            <span class="text-xs text-muted font-mono shrink-0">Oct 2020 – present</span>
-                        </div>
-                        <div class="space-y-1">
-                            <p class="text-xs text-muted">Development Analyst</p>
-                            <p class="text-xs text-muted">Mid-level Full Stack Developer</p>
-                            <p class="text-xs text-muted">Junior Full Stack Developer</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skills -->
-                <div class="card-glow bg-surface border border-border rounded p-5 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised sm:col-span-2">
-                    <p class="text-xs text-muted uppercase tracking-widest mb-5"><span class="text-accent"> > skills</span></p>
-                    <div class="grid grid-cols-2 gap-5">
-                        <div>
-                            <p class="text-xs text-muted font-mono mb-2">backend</p>
-                            <div class="flex flex-wrap gap-1.5">
-                                {['PHP', 'Laravel', 'Livewire', 'Go'].map(s => (
-                                    <span class="text-xs font-mono text-text bg-canvas border border-border rounded px-2 py-0.5">{s}</span>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-xs text-muted font-mono mb-2">frontend</p>
-                            <div class="flex flex-wrap gap-1.5">
-                                {['JS/TS', 'Tailwind', 'Bootstrap'].map(s => (
-                                    <span class="text-xs font-mono text-text bg-canvas border border-border rounded px-2 py-0.5">{s}</span>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-xs text-muted font-mono mb-2">database</p>
-                            <div class="flex flex-wrap gap-1.5">
-                                {['MySQL', 'PostgreSQL'].map(s => (
-                                    <span class="text-xs font-mono text-text bg-canvas border border-border rounded px-2 py-0.5">{s}</span>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-xs text-muted font-mono mb-2">devops</p>
-                            <div class="flex flex-wrap gap-1.5">
-                                {['Docker'].map(s => (
-                                    <span class="text-xs font-mono text-text bg-canvas border border-border rounded px-2 py-0.5">{s}</span>
-                                ))}
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-xs text-muted font-mono mb-2">tools</p>
-                            <div class="flex flex-wrap gap-1.5">
-                                {['Git', 'NPM', 'Composer', 'Vite'].map(s => (
-                                    <span class="text-xs font-mono text-text bg-canvas border border-border rounded px-2 py-0.5">{s}</span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div class="card-glow bg-surface border border-border rounded p-5 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
-                    <p class="text-xs text-muted uppercase tracking-widest mb-4"><span class="text-accent"> > education & certs</span></p>
-                    <div class="space-y-3">
-                        <div class="border-l border-border pl-4">
-                            <span class="text-sm font-medium text-text">Senac Brasil</span>
-                            <p class="text-xs text-muted mt-0.5">Systems Analysis and Development</p>
-                        </div>
-                        <div class="border-l border-border pl-4">
-                            <a href="https://cursos.alura.com.br/user/isaque-santos0/fullCertificate/2d3211521741cb72f0c2c6a8b673279d"
-                               target="_blank" rel="noopener noreferrer"
-                               class="inline-flex items-center gap-1 text-sm font-medium text-text hover:text-accent transition-colors duration-150">
-                                Alura <i class="ti ti-external-link text-xs"></i>
-                            </a>
-                            <p class="text-xs text-muted mt-0.5">Full certificate — web development</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Languages -->
-                <div class="card-glow bg-surface border border-border rounded p-5 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised">
-                    <p class="text-xs text-muted uppercase tracking-widest mb-4"><span class="text-accent"> > languages</span></p>
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-text">Portuguese</span>
-                            <span class="text-xs text-muted font-mono">Native</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-text">English</span>
-                            <span class="text-xs text-muted font-mono">Professional</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-text">Spanish</span>
-                            <span class="text-xs text-muted font-mono">Basic</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projects -->
-                <div class="card-glow bg-surface border border-border rounded p-5 transition-colors duration-200 hover:border-accent/30 hover:bg-surface-raised sm:col-span-2">
-                    <p class="text-xs text-muted uppercase tracking-widest mb-3"><span class="text-accent"> > projects</span></p>
-                    <p class="text-sm text-muted leading-relaxed">
-                        Section under construction. Check out my work on{' '}
-                        <a href="https://linkedin.com/in/isaqueafs"
-                           target="_blank" rel="noopener noreferrer"
-                           class="text-accent hover:text-accent/80 transition-colors duration-150">
-                            LinkedIn
-                        </a>.
-                    </p>
-                </div>
-
-            </div>
-
-            <footer class="pt-4 border-t border-border flex items-center justify-between gap-6 flex-wrap">
-                <p class="text-xs text-muted font-mono">© {year} Isaque Santos</p>
-                <div class="flex items-center gap-4">
-                    <a href="mailto:isaqueafsantos@gmail.com"
-                       class="flex items-center gap-1.5 text-xs text-muted hover:text-text transition-colors duration-150">
-                        <i class="ti ti-mail text-accent/70"></i>
-                        <span>isaqueafsantos@gmail.com</span>
-                    </a>
-                    <a href="https://linkedin.com/in/isaqueafs"
-                       target="_blank" rel="noopener noreferrer"
-                       class="flex items-center gap-1.5 text-xs text-muted hover:text-text transition-colors duration-150">
-                        <i class="ti ti-brand-linkedin text-accent/70"></i>
-                        <span>isaqueafs</span>
-                    </a>
-                </div>
+            <footer class="mt-10 lg:mt-14 pt-5 border-t border-border flex items-center justify-between gap-x-6 gap-y-2 flex-wrap">
+                <p class="text-meta text-muted font-mono">© {year} Isaque Santos</p>
+                <ContactLinks />
             </footer>
 
         </div>
     </main>
 </Base>
 
-<script>
-    const btn = document.getElementById('theme-toggle')!
-
-    function getTheme() {
-        return document.documentElement.getAttribute('data-theme') || 'dark'
-    }
-
-    function updateLabel() {
-        btn.innerHTML = getTheme() === 'dark'
-            ? '<i class="ti ti-sun"></i>'
-            : '<i class="ti ti-moon"></i>'
-    }
-
-    btn.addEventListener('click', () => {
-        const next = getTheme() === 'dark' ? 'light' : 'dark'
-        document.documentElement.setAttribute('data-theme', next)
-        document.documentElement.classList.add('theme-ready')
-        document.cookie = `theme=${next};path=/;max-age=31536000;SameSite=Lax`
-        updateLabel()
-    })
-
-    updateLabel()
-</script>
